@@ -2,9 +2,10 @@
 
 From the repo folder:
 
-    python source/696_Qunshan.py
+    pip install -r requirements.txt
+    python source/python/696_Qunshan.py
 
-In Colab, open source/696_Qunshan.ipynb and run the cells from the top.
+In Colab, open source/workbench/696_Qunshan.ipynb and run the cells from the top.
 This script runs those same code cells. On a computer without Google Drive
 it reads data/raw and creates the processed files if they are not there yet.
 """
@@ -18,7 +19,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 
-NOTEBOOK = Path(__file__).with_name("696_Qunshan.ipynb")
+NOTEBOOK = Path(__file__).resolve().parents[1] / "workbench" / "696_Qunshan.ipynb"
 SHORTCUT = Path(
     "/content/drive/.shortcut-targets-by-id/1Etb6PgEnIDI846xzjqpiUS4nA8LNJh3f/SIADS_696_project"
 )

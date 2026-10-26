@@ -1,6 +1,6 @@
 # SIADS 696 Team 06
 
-Supervised modeling is in `source/696_Qunshan.ipynb`. It predicts three-year overall survival for TCGA-KIRC from clinical variables and CIBERSORT immune proportions.
+Supervised modeling is in `source/workbench/696_Qunshan.ipynb`. The same code can be run from `source/python/696_Qunshan.py`. It predicts three-year overall survival for TCGA-KIRC from clinical variables and CIBERSORT immune proportions.
 
 ## Data
 
@@ -18,7 +18,7 @@ On Google Drive those same files are in `SIADS_696_project/data/processed`.
 
 ## Run it in Google Colab
 
-1. Upload `source/696_Qunshan.ipynb` to Colab, or open it from Drive.
+1. Upload `source/workbench/696_Qunshan.ipynb` to Colab, or open it from Drive.
 2. Use a runtime that can install packages. In a Colab cell, run `!pip install -r requirements.txt`.
 3. Run the notebook cells from the top.
 4. Allow the Drive mount when Colab asks.
@@ -27,16 +27,11 @@ On Google Drive those same files are in `SIADS_696_project/data/processed`.
 
 ## Run it on your computer
 
-From the repo folder:
-
-```bash
-python source/696_Qunshan.py
-```
-
-Install the dependencies first:
+From the repo folder, install the dependencies, then run the script:
 
 ```bash
 pip install -r requirements.txt
+python source/python/696_Qunshan.py
 ```
 
-The script runs the same code cells as the notebook. It does not mount Google Drive. It finds `data/raw` in this repo, and if `data/processed` does not already contain the two training files, it creates them. Drive-only cells are skipped. The model search can take a long time.
+The script runs the same code cells as the notebook in `source/workbench`. It does not mount Google Drive. It finds `data/raw` in this repo, and if `data/processed` does not already contain the two training files, it creates them. Drive-only cells are skipped. The model search can take a long time.
