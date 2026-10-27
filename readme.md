@@ -1,5 +1,7 @@
 # SIADS 696 Team 06
 
+The final report is here: https://docs.google.com/document/d/1fEONCNopRJT-BAK175rt4tA-QZsGhMV0eOzdT0e9y8E/edit?usp=sharing
+
 This project asks whether tumor-infiltrating immune cell proportions improve the prediction of three-year overall survival in kidney renal clear cell carcinoma (TCGA-KIRC) beyond clinical variables. It uses TCGA clinical and survival data together with CIBERSORT estimates of 22 immune cell types.
 
 Team: Qunshan Jia, Fang Yuan, Affan Atif
