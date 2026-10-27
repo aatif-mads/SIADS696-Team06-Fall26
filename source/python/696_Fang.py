@@ -12,11 +12,34 @@ Original file is located at
 """
 
 from pathlib import Path
-from google.colab import drive
 
-drive.mount('/content/drive')
+# Colab reads the files from Google Drive.
+# Anywhere else, read the copies in data/raw of the repo.
+try:
+    from google.colab import drive
+    IN_COLAB = True
+except ImportError:
+    IN_COLAB = False
 
-PROJECT_DIR = Path('/content/drive/MyDrive/SIADS_696_project')
+if IN_COLAB:
+    drive.mount('/content/drive')
+    PROJECT_DIR = Path('/content/drive/MyDrive/SIADS_696_project')
+else:
+    import matplotlib
+    matplotlib.use('Agg')
+
+    PROJECT_DIR = None
+    for folder in [Path.cwd(), *Path.cwd().parents, *Path(__file__).resolve().parents]:
+        if (folder / 'data' / 'raw' / 'TCGA-CDR-SupplementalTableS1.xlsx').exists():
+            PROJECT_DIR = folder
+            break
+    if PROJECT_DIR is None:
+        raise FileNotFoundError("Could not find data/raw. Run this from inside the repo folder.")
+
+try:
+    from IPython.display import display
+except ImportError:
+    display = print
 
 RAW_DIR = PROJECT_DIR / 'data' / "raw"
 PROCESSED_DIR = PROJECT_DIR / 'data' / "processed"

@@ -51,15 +51,21 @@ In Colab, run `!pip install -r requirements.txt` in a cell, or let each notebook
 
 ## Run on local
 
-`696_Qunshan.py` runs on a local machine without Google Drive:
+Every file checks whether it is running in Colab. Outside Colab it skips Google Drive and reads `data/raw` from this repo. From the repo folder:
 
 ```bash
+python source/python/696_Fang.py
 python source/python/696_Qunshan.py
+python source/python/696_Affan.py
 ```
 
-It reads `data/raw`, builds the two processed files if they are missing, and skips the Drive-only cells. The model search can take a long time.
+The notebooks in `source/workbench` also run locally in Jupyter when they are opened from inside the repo.
 
-`696_Fang.py` and `696_Affan.py` are exported from Colab. They still contain the Google Drive mount and `!pip` lines, so run them as notebooks in Colab.
+Outputs are written inside the repo folder:
+
+- `696_Fang` writes the two processed files to `data/processed`, and its figures and tables to `outputs/`.
+- `696_Qunshan` builds the two processed files if they are missing. Its model search can take a long time.
+- `696_Affan` writes its figures, tables, and cluster labels to `SIADS_696_outputs/`.
 
 ## Run in Google Colab
 

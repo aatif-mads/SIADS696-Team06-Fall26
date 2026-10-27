@@ -15,7 +15,9 @@ All 533 patients with an immune profile are included. Patients with short follow
 It reads the two data files from My Drive
 """
 
-!pip install -q lifelines openpyxl
+# In Colab, install the extra packages first:
+# !pip install -q lifelines openpyxl
+# Locally, run: pip install -r requirements.txt
 
 """This step installs lifelines and openpyxl.
 
@@ -65,15 +67,33 @@ MIN_CLUSTER_FRACTION = min_cluster_fraction
 DAYS_3Y = days_3y
 YEAR_DAYS = year_days
 
-# connect to Google Drive
-from google.colab import drive
+# Colab reads the files from Google Drive.
+# Anywhere else, read the copies in data/raw of the repo.
+try:
+    from google.colab import drive
+    use_google_drive = True
+except ImportError:
+    use_google_drive = False
 
-drive.mount("/content/drive", force_remount=True)
-
-# the two data files sit in My Drive itself, not in a subfolder
-DRIVE_DIR = Path("/content/drive/MyDrive")
-CDR_FILE = DRIVE_DIR / "TCGA-CDR-SupplementalTableS1.xlsx"
-IMMUNE_FILE = DRIVE_DIR / "TCGA.Kallisto.fullIDs.cibersort.relative.tsv"
+if use_google_drive:
+    drive.mount("/content/drive", force_remount=True)
+    # the two data files sit in My Drive itself, not in a subfolder
+    DRIVE_DIR = Path("/content/drive/MyDrive")
+    CDR_FILE = DRIVE_DIR / "TCGA-CDR-SupplementalTableS1.xlsx"
+    IMMUNE_FILE = DRIVE_DIR / "TCGA.Kallisto.fullIDs.cibersort.relative.tsv"
+else:
+    plt.switch_backend("Agg")
+    DRIVE_DIR = None
+    for folder in [Path.cwd(), *Path.cwd().parents, *Path(__file__).resolve().parents]:
+        clinical_path = folder / "data" / "raw" / "TCGA-CDR-SupplementalTableS1.xlsx"
+        immune_path = folder / "data" / "raw" / "TCGA.Kallisto.fullIDs.cibersort.relative.tsv"
+        if clinical_path.exists() and immune_path.exists():
+            DRIVE_DIR = folder
+            CDR_FILE = clinical_path
+            IMMUNE_FILE = immune_path
+            break
+    if DRIVE_DIR is None:
+        raise FileNotFoundError("Could not find data/raw. Run this from inside the repo folder.")
 
 # folders for the saved files
 OUT_DIR = DRIVE_DIR / "SIADS_696_outputs"
