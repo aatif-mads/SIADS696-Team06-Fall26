@@ -69,6 +69,23 @@ def prepare_cell(source, in_colab):
         "from IPython.display import display",
         "pass  # display is already defined",
     )
+    # Sex was left as text, and the original stage and grade text was kept.
+    # Encode sex with the other categories and drop the text columns.
+    text = text.replace(
+        '''categorical_cols = [
+    "ajcc_pathologic_tumor_stage",
+    "histological_grade"
+]''',
+        '''categorical_cols = [
+    "gender",
+    "ajcc_pathologic_tumor_stage",
+    "histological_grade"
+]''',
+    )
+    text = text.replace(
+        "[supervised, one_hot]",
+        "[supervised.drop(columns=categorical_cols), one_hot]",
+    )
     text = re.sub(
         r"files\.download\((.*?)\)",
         r'print("Saved", \1)',
