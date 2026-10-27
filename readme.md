@@ -56,9 +56,9 @@ In Colab, run `!pip install -r requirements.txt` in a cell, or let each notebook
 Every file checks whether it is running in Colab. Outside Colab it skips Google Drive and reads `data/raw` from this repo. From the repo folder:
 
 ```bash
-python source/python/696_Fang.py
-python source/python/696_Qunshan.py
-python source/python/696_Affan.py
+python3 source/python/696_Fang.py
+python3 source/python/696_Qunshan.py
+python3 source/python/696_Affan.py
 ```
 
 The notebooks in `source/workbench` also run locally in Jupyter when they are opened from inside the repo.
